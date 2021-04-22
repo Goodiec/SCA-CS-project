@@ -1,25 +1,28 @@
 import React from 'react';
-import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Route} from "react-router-dom";
-
-import Navbar from "./components/navbar.component"
-import ExercisesList from "./components/exercises-list.component";
-import EditExercise from "./components/edit-exercise.component";
-import CreateExercise from "./components/create-exercise.component";
-import CreateUser from "./components/create-user.component";
+import { Route, Switch, Link } from 'react-router-dom'
+import { TodoList } from './TodoList'
+import { CreateTodo } from './CreateTodo'
+import { EditTodo } from './EditTodo'
 
 function App() {
   return (
-    <Router>
-      <div className="container">
-      <Navbar />
-      <br/>
-      <Route path="/" exact component={ExercisesList} />
-      <Route path="/edit/:id" component={EditExercise} />
-      <Route path="/create" component={CreateExercise} />
-      <Route path="/user" component={CreateUser} />
-      </div>
-    </Router>
+    <div>
+      <nav className="navbar bg-light navbar-expand-lg navbar-light">
+        <ul className="navbar-nav mr-auto">
+          <li className="navbar-item">
+            <Link to="/" className="nav-link">Todos</Link>
+          </li>
+          <li className="navbar-item">
+            <Link to="/create" className="nav-link">Create Todo</Link>
+          </li>
+        </ul>
+      </nav>
+    <Switch>
+      <Route exact path="/" component={TodoList}/>
+      <Route path="/edit/:id" component={EditTodo}/>
+      <Route path="/create" component={CreateTodo}/>
+    </Switch>
+    </div>
   );
 }
 

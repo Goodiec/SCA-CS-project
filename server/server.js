@@ -1,39 +1,68 @@
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
-const dotenv = require("dotenv");
-dotenv.config();
-// require('dotenv').config();
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const Todo = require("./models/Todo");
 
-const app = express();
-const port = process.env.PORT || 8088;
-
-app.use(cors());
-app.use(express.json());
-
-// const CONNECTION_URL = 'mongodb+srv://todoDb:trNMXllrEi7vXvXN@cluster0.jw43h.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-// const CONNECTION_URL = 'mongodb://localhost:27017/todos';
-const connection = "mongodb://mongo:27017/todos";
-mongoose.connect(connection, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb://mongo:27017/todos", { useNewUrlParser: true });
 
 mongoose.connection.once("open", () => {
   console.log("Mongodb connection established successfully");
 });
 
-// const uri = process.env.ATLAS_URI;
-// mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true }
-// );
-// const connection = mongoose.connection;
-// connection.once('open', () => {
-//   console.log("MongoDB database connection established successfully");
-// })
+const PORT = 4000;
 
-const exercisesRouter = require('./routes/exercises');
-const usersRouter = require('./routes/users');
+const app = express();
 
-app.use('/exercises', exercisesRouter);
-app.use('/users', usersRouter);
+app.use(cors());
+app.use(express.json());
 
-app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
+app.get("/", (req, res) => {
+  Todo.find((err, todos) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(todos);
+    }
+  });
+});
+
+app.post("/create", (req, res) => {
+  const todo = new Todo(req.body);
+  todo
+    .save()
+    .then((todo) => {
+      res.json(todo);
+    })
+    .catch((err) => {
+      res.status(500).send(err.message);
+    });
+});
+
+app.get("/:id", (req, res) => {
+  const id = req.params.id;
+  Todo.findById(id, (err, todo) => {
+    res.json(todo);
+  });
+});
+
+app.post("/:id", (req, res) => {
+  const id = req.params.id;
+  Todo.findById(id, (err, todo) => {
+    if (!todo) {
+      res.status(404).send("Todo not found");
+    } else {
+      todo.text = req.body.text;
+
+      todo
+        .save()
+        .then((todo) => {
+          res.json(todo);
+        })
+        .catch((err) => res.status(500).send(err.message));
+    }
+  });
+});
+
+app.listen(PORT, () => {
+  console.log("Server is running on port " + PORT);
 });
