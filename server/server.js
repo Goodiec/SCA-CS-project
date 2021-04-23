@@ -3,7 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const Todo = require("./models/Todo");
 
-mongoose.connect("mongodb://mongo:27017/todos", { useNewUrlParser: true });
+mongoose.connect("mongodb://mongo:27017/todos-app", { useNewUrlParser: true });
 
 mongoose.connection.once("open", () => {
   console.log("Mongodb connection established successfully");

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: todo-client
+   labels:
+     app: todo-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: todo-app
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: todo-app
+        tier: frontend
+    spec:
+      containers:
+      - name: todo-app
+        image: goodiec/react-app:v1
+        imagePullPolicy: Always
+        ports:
+        - name: http-server
+          containerPort: 8080
+        env:
+          - name: GCLOUD_PROJECT
+            value: cloud-school-project-310615
+          - name: GCLOUD_BUCKET
+            value: [GCLOUD_BUCKET]
