@@ -20,15 +20,11 @@
   </h3>
 </div>
 
-<!-- TABLE OF CONTENTS -->
-
-## Table of Contents
-
-- [Overview](#overview)
-  <!-- - [Built With](#built-with) -->
-<!-- - [Features](#features) -->
-
-<!-- OVERVIEW -->
-
 ## Overview
+This project tends to show how some of the most import DevOps concepts can be applied. For this project, I used a an application built with React for the frontend, NodeJS for the backend and Mongodb as Database. 
 
+## Running Application locally
+You can run this application locally to see how it looks, note that you need to have Docker installed. To run this application locally, clone this repository, change directory to the repository directory and the open up your command prompt and run 
+```
+docker-compose up
+```
