@@ -10,11 +10,11 @@
       Demo
     </a>
     <span> | </span>
-    <a href="https://devchallenges.io/solutions/4w1dkJ1VmNYkifi68dej">
+    <a href="https://github.com/Goodiec/SCA-CS-terraform">
       Terraform files
     </a>
     <span> | </span>
-    <a href="https://devchallenges.io/challenges/hhmesazsqgKXrTkYkt0U">
+    <a href="#">
       Tutorial Article
     </a>
   </h3>

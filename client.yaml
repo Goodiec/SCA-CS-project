@@ -18,13 +18,10 @@ spec:
     spec:
       containers:
       - name: todo-app
-        image: goodiec/react-app:v1
+        image: gcr.io/cloud-school-project-310615/react-app:v1
         imagePullPolicy: Always
         ports:
-        - name: http-server
-          containerPort: 8080
+          - containerPort: 80
         env:
-          - name: GCLOUD_PROJECT
-            value: cloud-school-project-310615
-          - name: GCLOUD_BUCKET
-            value: [GCLOUD_BUCKET]
+        - name: MONGO_URL
+          value: mongodb://mongo:27017/todos-app
