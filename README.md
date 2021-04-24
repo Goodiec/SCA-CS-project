@@ -28,3 +28,8 @@ You can run this application locally to see how it looks, note that you need to 
 ```
 docker-compose up
 ```
+## Tools & Technologies Used
+- Google Cloud Platform
+- Terraform
+- Docker
+- Kubernetes
