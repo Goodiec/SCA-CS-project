@@ -6,7 +6,7 @@
 
 <div align="center">
   <h3>
-    <a href="https://goodiec-team-page.netlify.app">
+    <a href="#">
       Demo
     </a>
     <span> | </span>
